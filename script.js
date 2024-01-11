@@ -1,13 +1,15 @@
 const rulesListContainer = document.getElementById('dataListContainer');
 const addButton = document.getElementById('loadDataButton'); 
 
+
 addButton.addEventListener('click', function() {
+   
     fetch('datatoinsert.json')
         .then(response => response.json())
-        .then(data => {
+        .then(json => {
             const rulesList = document.createElement('ul');
 
-            data.forEach(rule => {
+            json.forEach(rule => {
                 const listItem = document.createElement('li');
                 listItem.textContent = rule;
                 rulesList.appendChild(listItem);
