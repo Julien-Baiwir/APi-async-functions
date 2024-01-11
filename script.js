@@ -37,6 +37,7 @@ function handleDefinition() {
         })
         .then((json) => {
             insertDefinitionHtml(json[0]);
+            console.log(json);
         })
         .catch((error) => {
             console.error("There was an error!", error);
