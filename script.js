@@ -40,8 +40,11 @@ const getTodos = async () => {
     return data;
   };
 // console.log(getTodos());// contient une promesse avec la data mais la promesse n'est pas encore résolue
+console.log(1);
 getTodos()
-.then(data=> console.log('resolved:', data));
+.then(data => console.log('resolved', data));
+console.log(2);
+// .then(data=> console.log('resolved:', data));
 // .then(data => console.log('resolved:', data)); : C'est une continuation de la chaîne de promesses. Une fois que la promesse retournée par getTodos() est résolue, cette fonction de rappel est exécutée avec les données retournées. Elle logge les données dans la console avec le message 'resolved:'.
 
 
