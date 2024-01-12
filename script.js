@@ -1,48 +1,49 @@
-// https://api.dictionaryapi.dev/api/v2/entries/en/hello
-// https://api.dictionaryapi.dev/api/v2/entries/en/bye possible d'entrer le lien direct
+//     // Étape 1: Initié une requête pour récupérer le fichier JSON
+// fetch('list.json')
 
-const fetchWordDefinition = (word) => fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-let InputWord = ""; // Déclarer InputWord en dehors de la fonction handleDefinition
+// // Étape 2: Une fois la requête résolue, exécute la fonction callback avec la réponse
+//   .then((response) => {
+//     // Affiche dans la console que la requête a été résolue et log la réponse
+//     console.log('Résolu :', response);
 
-document.getElementById("addBtn").addEventListener("click", handleDefinition);
+//     // Retourne la promesse de la réponse JSON parsée pour la prochaine étape
+//     return response.json();
+//   })
 
-function insertDefinitionHtml(definition) {
-    const template = `
-        <div>
-         <h2>${definition.word}
-         <p>${definition.meanings[0].definitions[0].definition}</p>
-        </div>
-    `;
+// // Étape 3: Une fois la réponse JSON parsée, exécute la fonction callback avec les données
+//   .then(data => {
+//     // Affiche dans la console les données JSON parsées
+//     console.log(data);
+//   });
+
+    // fetch('list.json').then((response)=>{
+    //     console.log('resolved', response);
+    //     return response.json();
+    //  }).then(data =>{
+    //     console.log(data);
+    //  })
+    //  .catch((err) =>{
+    //     console.log('rejected', err);
+    //  })
 
 
-    const newElement = document.createElement('div');
-    newElement.innerHTML = template;
-    document.body.appendChild(newElement);
-}
+// const getTodos = async () => {
+//   const response = await fetch('list.json');
+// };
+// const test = getTodos();
+// console.log(test);
+// When you assign the result of getTodos() to the variable test (const test = getTodos();), test will be a promise because getTodos is an asynchronous function that returns a promise. The value logged for test will be the promise itself, which is why you see the Promise object in the console.
 
-function handleDefinition() {
-    InputWord = document.getElementById("wordInput").value;
+const getTodos = async () => {
+    const response = await fetch('list.json');
+    const data = await response.json();
+    return data;
+  };
+// console.log(getTodos());// contient une promesse avec la data mais la promesse n'est pas encore résolue
+getTodos()
+.then(data=> console.log('resolved:', data));
+// .then(data => console.log('resolved:', data)); : C'est une continuation de la chaîne de promesses. Une fois que la promesse retournée par getTodos() est résolue, cette fonction de rappel est exécutée avec les données retournées. Elle logge les données dans la console avec le message 'resolved:'.
 
-    if (InputWord.trim() === "") {
-        console.error("Input word is empty.");
-        return;
-    }
-
-    fetchWordDefinition(InputWord)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((json) => {
-            insertDefinitionHtml(json[0]);
-            console.log(json);
-        })
-        .catch((error) => {
-            console.error("There was an error!", error);
-        });
-}
 
     
   
